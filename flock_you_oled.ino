@@ -1,10 +1,10 @@
 // ============================================================
-// Flock-You OLED Edition — ESP8266 D1 Mini + SH1106 128×64
+// Flock Hunter — ESP8266 D1 Mini + SH1106 128×64
 // ============================================================
 // WiFi-based Flock Safety surveillance camera detector with
 // SH1106 OLED dashboard, piezo buzzer, and LittleFS persistence.
 //
-// Based on colonelpanichacks/flock-you
+// Based on Flock You by colonelpanichacks/flock-you
 // OUI dataset: @NitekryDPaul, DeFlockJoplin, @wgreenberg
 // Wildcard-probe signature: DeFlockJoplin
 //
@@ -87,7 +87,7 @@ static const size_t  fullHopChannelCount = sizeof(fullHopChannels) / sizeof(full
 #define FY_PREV_FILE         "/prev.json"
 
 // ============================================================
-// TARGET OUI LIST (lowercase, colons) — 31 known Flock prefixes
+// TARGET OUI LIST (lowercase, colons) — 32 known Flock prefixes
 // ============================================================
 
 static const char* target_ouis[] = {
@@ -97,7 +97,8 @@ static const char* target_ouis[] = {
   "00:f4:8d", "d0:39:57", "e8:d0:fc", "e0:4f:43", "b8:1e:a4",
   "70:08:94", "58:8e:81", "ec:1b:bd", "3c:71:bf", "58:00:e3",
   "90:35:ea", "5c:93:a2", "64:6e:69", "48:27:ea", "a4:cf:12",
-  "82:6b:f2"   // DeFlockJoplin — 31st OUI
+  "82:6b:f2",  // DeFlockJoplin — 31st OUI
+  "b4:1e:52"   // registered Flock Safety OUI — 32nd
 };
 static const size_t OUI_COUNT = sizeof(target_ouis) / sizeof(target_ouis[0]);
 static uint8_t oui_bytes[OUI_COUNT][3];
@@ -530,10 +531,10 @@ static void drawScreen() {
   if (isFlashing) {
     display.drawBox(2, 0, DISP_W - 4, 9);
     display.setDrawColor(0);
-    display.drawStr(2, HEADER_Y, "! FLOCK-YOU !");
+    display.drawStr(2, HEADER_Y, "! FLOCK HUNTER !");
   } else {
     display.setDrawColor(1);
-    display.drawStr(2, HEADER_Y, "FLOCK-YOU");
+    display.drawStr(2, HEADER_Y, "FLK-HUNT");
   }
   display.setDrawColor(1);
 
@@ -630,16 +631,16 @@ static void drawScreen() {
 static void drawSplash() {
   display.clearBuffer();
   display.setFont(u8g2_font_7x14B_tr);
-  const char* t1 = "FLOCK-YOU";
+  const char* t1 = "FLOCK HUNTER";
   int w1 = display.getStrWidth(t1);
   display.drawStr((DISP_W - w1) / 2, 20, t1);
 
   display.setFont(u8g2_font_5x8_tr);
-  const char* t2 = "OLED Edition";
+  const char* t2 = "Based on Flock You";
   int w2 = display.getStrWidth(t2);
   display.drawStr((DISP_W - w2) / 2, 34, t2);
 
-  const char* t3 = "colonelpanichacks";
+  const char* t3 = "32 OUI Signatures";
   int w3 = display.getStrWidth(t3);
   display.drawStr((DISP_W - w3) / 2, 48, t3);
 

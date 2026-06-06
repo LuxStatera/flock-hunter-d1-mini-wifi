@@ -1,4 +1,4 @@
-# Flock-You OLED Detector
+# Flock Hunter — D1 Mini OLED Edition
 
 A tiny, portable Flock Safety camera detector built on an **ESP8266 D1 Mini** with a **128x64 SH1106 OLED display** and **piezo buzzer**. Passively sniffs WiFi traffic and alerts you when a Flock surveillance camera is nearby.
 
@@ -6,13 +6,13 @@ A tiny, portable Flock Safety camera detector built on an **ESP8266 D1 Mini** wi
 
 ## Credits
 
-This project is based on the original **[Flock You](https://github.com/colonelpanichacks/flock-you)** project by **[colonelpanichacks](https://github.com/colonelpanichacks)**.
+This project evolved from the original **[Flock You](https://github.com/colonelpanichacks/flock-you)** project by **[colonelpanichacks](https://github.com/colonelpanichacks)**.
 
 This firmware and README were vibe coded with **[Claude](https://claude.ai)** by Anthropic.
 
 ## How It Works
 
-Flock Safety cameras periodically emit WiFi probe requests and other management frames. Researchers identified 31 OUI (MAC address) prefixes consistently associated with Flock camera deployments through field testing. This firmware puts the ESP8266 into promiscuous mode and passively listens on channels 1, 6, and 11 for packets matching those OUI prefixes.
+Flock Safety cameras periodically emit WiFi probe requests and other management frames. Researchers identified 32 OUI (MAC address) prefixes consistently associated with Flock camera deployments through field testing. This firmware puts the ESP8266 into promiscuous mode and passively listens on channels 1, 6, and 11 for packets matching those OUI prefixes.
 
 When a match is found, the buzzer chirps, the OLED highlights the detection, and the event is logged to flash storage (LittleFS). Detection history resets on reboot.
 
@@ -52,7 +52,7 @@ D5 (GPIO 14)→    Buzzer (+)
 ![Scanning screen](images/mini_scan.jpg)
 
 ```
-FLOCK-YOU  CH:6   D:3    ← header (channel + detection count)
+FLK-HUNT  CH:6   D:3    ← header (channel + detection count)
 ──────────────────────
 >70:c9:4e:xx -62 H  6   ← newest (highlighted = recent)
  3c:91:80:xx -78 M  1   ← MAC, RSSI, signal quality, channel
@@ -137,14 +137,14 @@ Heartbeat status every 30 seconds:
 ## Features
 
 - **Passive sniffing** — no transmitting, no network connections
-- **31 OUI signatures** — matches known Flock Safety hardware prefixes
+- **32 OUI signatures** — matches known Flock Safety hardware prefixes
 - **Channel hopping** — cycles channels 1, 6, 11 (350ms dwell)
 - **Session logging** — detections saved to LittleFS during each session (resets on reboot)
 - **Deduplication** — 5-second cooldown per MAC, 30-second rediscovery window
 - **Heartbeat beeps** — soft reminder when a detected camera is still in range
 - **100 detection slots** — optimized for ESP8266's limited RAM (~80KB)
 
-## 31 Flock Safety OUI Prefixes
+## 32 Flock Safety OUI Prefixes
 
 ```
 70:c9:4e  3c:91:80  d8:f3:bc  80:30:49  b8:35:32
@@ -153,7 +153,7 @@ Heartbeat status every 30 seconds:
 00:f4:8d  d0:39:57  e8:d0:fc  e0:4f:43  b8:1e:a4
 70:08:94  58:8e:81  ec:1b:bd  3c:71:bf  58:00:e3
 90:35:ea  5c:93:a2  64:6e:69  48:27:ea  a4:cf:12
-82:6b:f2
+82:6b:f2  b4:1e:52
 ```
 
 ## Legal Disclaimer
