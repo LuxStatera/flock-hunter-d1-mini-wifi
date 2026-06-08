@@ -595,7 +595,7 @@ static void drawScreen() {
       display.drawStr(62, y, rssiBuf);
 
       char ftBuf[6];
-      snprintf(ftBuf, sizeof(ftBuf), "~%d", rssiToFeet(d.rssi));
+      snprintf(ftBuf, sizeof(ftBuf), "~%dft", rssiToFeet(d.rssi));
       display.drawStr(88, y, ftBuf);
 
       display.drawStr(115, y, chStr);
