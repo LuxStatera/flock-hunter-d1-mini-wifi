@@ -53,7 +53,7 @@ extern "C" {
 #define CHANNEL_MODE_SINGLE     2
 
 #define CHANNEL_MODE       CHANNEL_MODE_CUSTOM
-#define CHANNEL_DWELL_MS   350
+#define CHANNEL_DWELL_MS   150
 #define SINGLE_CHANNEL     6
 
 static const uint8_t customChannels[]    = {1, 6, 11};

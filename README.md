@@ -134,7 +134,7 @@ Select **Tools → Board → `Generic ESP8266 Module`** and configure:
 
 ### Display Compatibility
 
-This firmware is written for the **SH1106** OLED controller (common on 1.3" modules). If you have the smaller **SSD1306** (0.96" OLED), change line 113 in the sketch from:
+This firmware is written for the **SH1106** OLED controller (common on 1.3" modules). If you have the smaller **SSD1306** (0.96" OLED), find and change this line in the sketch from:
 ```
 U8G2_SH1106_128X64_NONAME_F_HW_I2C display(...)
 ```
@@ -145,7 +145,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C display(...)
 
 ### Alternative Boards
 
-**HW-634A Generic ESP8266:** This board uses different default I2C pins. Change lines 110-111 in the sketch:
+**HW-634A Generic ESP8266:** This board uses different default I2C pins. Change the pin defines near the top of the sketch:
 ```
 #define OLED_SDA 14
 #define OLED_SCL 12
@@ -172,7 +172,7 @@ Heartbeat status every 30 seconds:
 
 - **Passive sniffing** — no transmitting, no network connections
 - **32 OUI signatures** — matches known Flock Safety hardware prefixes
-- **Channel hopping** — cycles channels 1, 6, 11 (350ms dwell)
+- **Channel hopping** — cycles channels 1, 6, 11 (150ms dwell)
 - **Session logging** — detections saved to LittleFS during each session (resets on reboot)
 - **Deduplication** — 5-second cooldown per MAC, 30-second rediscovery window
 - **Heartbeat beeps** — soft reminder when a detected camera is still in range
